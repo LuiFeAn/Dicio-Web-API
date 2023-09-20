@@ -1,19 +1,18 @@
 import { Injectable } from '@nestjs/common';
 
-import puppeteer from 'puppeteer';
+import { PuppeteerService } from 'src/puppeteer/puppeteer-service';
 
 @Injectable()
 export class DictionaryService {
 
+  constructor( private readonly puppeteerService: PuppeteerService ){}
+
   async findOne(wordSearch: string) {
-    
-      const browser = await puppeteer.launch({
-          headless:'new'
+
+      const page = await this.puppeteerService.initialize({
+        headless:'new',
+        page:`https://www.dicio.com.br/${wordSearch}`
       });
-
-      const page = await browser.newPage();
-
-      await page.goto(`https://www.dicio.com.br/${wordSearch}`);
 
       const results = await page.evaluate(function(){
 
