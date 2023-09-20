@@ -5,14 +5,11 @@ import { DictionaryService } from './dictionary.service';
 export class DictionaryController {
   constructor(private readonly dictionaryService: DictionaryService) {}
 
-  @Get()
-  findAll() {
-    return this.dictionaryService.findAll();
-  }
-
   @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.dictionaryService.findOne(+id);
+  findOne(@Param('id') word: string) {
+
+    return this.dictionaryService.findOne(word);
+
   }
 
 }

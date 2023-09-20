@@ -1,14 +1,32 @@
 import { Injectable } from '@nestjs/common';
 
+import puppeteer from 'puppeteer';
+
 @Injectable()
 export class DictionaryService {
 
-  findAll() {
-    return `This action returns all dictionary`;
-  }
+  async findOne(wordSearch: string) {
+    
+      const browser = await puppeteer.launch({
+          headless:'new'
+      });
 
-  findOne(id: number) {
-    return `This action returns a #${id} dictionary`;
+      const page = await browser.newPage();
+
+      await page.goto(`https://www.dicio.com.br/${wordSearch}`);
+
+      const results = await page.evaluate(function(){
+
+          const description = document.querySelector('.significado.textonovo');
+
+          const text = [ ...description.children ].map(({ innerHTML}) => innerHTML);
+
+          return text;
+
+      });
+
+      return results;
+
   }
 
 }
