@@ -10,9 +10,8 @@ export class DictionaryService {
 
   async searchWord(wordSearch: string) {
 
-      const page = await this.puppeteerService.initializePage({
-        headless:'new',
-        page:`https://www.dicio.com.br/${wordSearch.toLowerCase()}`
+      const page = await this.puppeteerService.initializePage(`https://www.dicio.com.br/${wordSearch.toLowerCase()}`,{
+        headless:'new'
       });
 
       const results = await page.evaluate(function(){
