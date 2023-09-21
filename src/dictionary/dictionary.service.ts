@@ -8,7 +8,7 @@ export class DictionaryService {
 
   constructor(private readonly puppeteerService: PuppeteerService){}
 
-  async findOne(wordSearch: string) {
+  async searchWord(wordSearch: string) {
 
       const page = await this.puppeteerService.initialize({
         headless:false,
