@@ -5,11 +5,11 @@ import { IPuppeteerConfigs } from "src/interfaces/puppeteer-configs";
 @Injectable()
 export class PuppeteerService {
 
-    async initialize(options: IPuppeteerConfigs){
+    async initializePage(options: IPuppeteerConfigs){
 
         const browser = await puppeteer.launch({
             headless: options.headless
-        });
+        }); 
   
         const page = await browser.newPage();
   
