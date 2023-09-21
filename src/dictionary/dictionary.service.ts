@@ -25,10 +25,10 @@ export class DictionaryService {
 
           const text = elements.map( element => ( element as HTMLElementWithInnerText).innerText );
 
-          const [ wordClass,...rest ] = text;
+          const [ word_class,...rest ] = text;
 
           return {
-            wordClass,
+            word_class,
             results:rest
           }
 
