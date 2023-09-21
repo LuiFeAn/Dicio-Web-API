@@ -1,7 +1,5 @@
 import puppeteer from "puppeteer";
-
 import { Injectable } from '@nestjs/common';
-
 import { IPuppeteerConfigs } from "src/interfaces/puppeteer-configs";
 
 @Injectable()
