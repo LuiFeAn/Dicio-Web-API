@@ -16,19 +16,28 @@ export class DictionaryService {
 
       const results = await page.evaluate(function(){
 
-          const description = document.querySelector('.significado.textonovo');
+          const descriptionContainer = document.querySelector('.significado.textonovo');
 
-          if( !description ) return
+          if( !descriptionContainer ) return
 
-          const elements = [ ...description.children ];
+          const synonymsContainer = document.querySelector('.adicional.sinonimos')
 
-          const text = elements.map( element => ( element as HTMLElementWithInnerText).innerText );
+          const getInnerTextFromElements = ( element: Element ) => {
 
-          const [ word_class,...rest ] = text;
+            const elementChildrens = [ ...element.children ];
+
+            return elementChildrens.map( element => ( element as HTMLElementWithInnerText).innerText )
+
+          }
+
+          const [ word_class,...rest ] = getInnerTextFromElements(descriptionContainer);
+
+          const synonyms = getInnerTextFromElements(synonymsContainer);
 
           return {
             word_class,
-            results:rest
+            results:rest,
+            synonyms
           }
 
       });
